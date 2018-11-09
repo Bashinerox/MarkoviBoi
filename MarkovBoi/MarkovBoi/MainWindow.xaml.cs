@@ -239,7 +239,11 @@ namespace MarkovBoi
         List<Timer> timers = new List<Timer>();
         ObservableCollection<string> LogList = new ObservableCollection<string>();
         static Random rnd = new Random();
-        System.Timers.Timer raveTimer;      
+        System.Timers.Timer raveTimer;
+
+
+        public string BotUsername { get { return "[BOTS USERNAME HERE]"; } }
+        public string AdminUsername { get { return "[YOUR USERNAME HERE]"; } }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
@@ -325,7 +329,7 @@ namespace MarkovBoi
 
                 ("!destroybrain", "Kill my brain! It probably won't hurt me!", (OnMessageReceivedArgs e) =>
                 {
-                    if(e.ChatMessage.Username != "bashinerox")
+                    if(e.ChatMessage.Username != AdminUsername)
                     {
                         client.SendMessage(e.ChatMessage.Channel,  "You're not authorized to do that, my dude. This incident has been reported, and the sudoers file has been deleted");
                         return;
@@ -419,7 +423,7 @@ namespace MarkovBoi
 
                 ("!quittingtime", "shut me down good and plenty", (OnMessageReceivedArgs e) =>
                 {
-                    if(e.ChatMessage.Username != "bashinerox")
+                    if(e.ChatMessage.Username != AdminUsername)
                     {
                         client.SendMessage(e.ChatMessage.Channel,  "not a chance, buckeroo");
                     }
@@ -438,7 +442,7 @@ namespace MarkovBoi
 
                 ("!unblacklist", "remove someone from the blacklist", (OnMessageReceivedArgs e) =>
                 {
-                    if (e.ChatMessage.Username != "bashinerox")
+                    if (e.ChatMessage.Username != AdminUsername)
                     {
                         client.SendMessage(e.ChatMessage.Channel, "not a chance, buckeroo. only Bash<3 can unblock peeps.");
                         return;
@@ -734,7 +738,7 @@ namespace MarkovBoi
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
             Log("Connecting...");
-            ConnectionCredentials credentials = new ConnectionCredentials("MarkoviBoi", OAuthData.OAUTH);
+            ConnectionCredentials credentials = new ConnectionCredentials(BotUsername, OAuthData.OAUTH);
 
             client = new TwitchClient();
             currentChannel = WantedTwitchChannel.Text;
